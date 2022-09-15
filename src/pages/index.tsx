@@ -40,7 +40,15 @@ export default function Home({ users } : HomeProps) {
             </tr>
           </thead>
           <tbody>
-            <tr>
+            {users.map(user => {return (
+              <tr key={user.id}>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.status}</td>
+              </tr>
+            )})}
+            
+            {/* <tr>
               <td>Rodrigo</td>
               <td>rodrigo@uk.com</td>
               <td>Ativo</td>
@@ -49,12 +57,7 @@ export default function Home({ users } : HomeProps) {
               <td>Rodrigo</td>
               <td>rodrigo@uk.com</td>
               <td>Ativo</td>
-            </tr>
-            <tr>
-              <td>Rodrigo</td>
-              <td>rodrigo@uk.com</td>
-              <td>Ativo</td>
-            </tr>
+            </tr> */}
           </tbody>
           
         </UsersList>
@@ -64,9 +67,10 @@ export default function Home({ users } : HomeProps) {
 }
 
 export const getServerSideProps : GetServerSideProps = async () => {
+  let users = [];
   try{
   
-    let users = await axios.get('https://gorest.co.in/public/v2/users')
+    users = await axios.get('https://gorest.co.in/public/v2/users')
       .then(res => res.data)
     
     console.log(users)
@@ -74,12 +78,9 @@ export const getServerSideProps : GetServerSideProps = async () => {
     console.log(err)
   }
   
-  
-  
-   
-
-
   return {
-    props: {}
+    props: {
+      users,
+    }
   }
 } 
