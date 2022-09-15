@@ -21,11 +21,9 @@ export default function Home({ users } : HomeProps) {
 
   useEffect(()=>{
     setUserList(users)
-  },[])
+  }, [users])
 
   let filteredUser = search.length > 0 ? usersList.filter(user => user.name.toLowerCase().includes(search)) : []
-
-  
 
   return (
     <>
@@ -38,7 +36,6 @@ export default function Home({ users } : HomeProps) {
 
         <SearchBar>
           <input type="text" placeholder="Busca por nome do  usuário" onChange={(e) => setSearch(e.currentTarget.value)}/>
-          <button type='submit'>Buscar</button>
         </SearchBar>
 
         <UsersList>
