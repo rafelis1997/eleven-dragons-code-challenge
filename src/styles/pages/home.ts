@@ -1,5 +1,6 @@
 import { styled } from "..";
 
+
 export const HomeContainer = styled('div', {
   display: "flex",
   flexDirection: "column",
@@ -46,16 +47,16 @@ export const SearchBar = styled('form', {
 
 export const UsersList = styled('table', {
   borderCollapse: 'collapse',
-  border:'10px solid $gray800',
+  border:'24px solid $gray800',
+  background: '$gray800',
   borderRadius: 16,
   overflow: "hidden",
-  padding: '0.5rem',
   boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.2)', 
 
   tr: {
     padding: '0.5rem',
     textAlign: 'center',
-    borderBottom:'1px solid $gray800',
+    borderBottom:'1px solid $gray900',
   },
 
   td: {
@@ -63,27 +64,27 @@ export const UsersList = styled('table', {
   },
 
   th: {
-    borderBottom:'5px solid $gray800',
+    borderBottom:'5px solid $gray900',
     padding:'1rem 0',
   },
 
   'th:first-child': {
-    borderRight: '5px solid $gray800',
+    borderRight: '5px solid $gray900',
     borderCollapse: 'collapse',
   },
 
   'th:last-child': {
-    borderLeft: '5px solid $gray800',
+    borderLeft: '5px solid $gray900',
     borderCollapse: 'collapse',
   },
 
   'td:first-child': {
-    borderRight: '1px solid $gray800',
+    borderRight: '5px solid $gray900',
     borderCollapse: 'collapse',
   },
 
   'td:last-child': {
-    borderLeft: '1px solid $gray800',
+    borderLeft: '5px solid $gray900',
     borderCollapse: 'collapse',
   },
 

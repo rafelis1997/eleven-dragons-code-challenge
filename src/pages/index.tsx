@@ -1,27 +1,18 @@
-import axios from 'axios';
-import type { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { FormEvent, FormEventHandler, useEffect, useState } from 'react';
+
+import {  useContext, useState } from 'react';
+import { Header } from '../components/Header';
+import { User, UserListContext } from '../context/UsersListContext';
 import { HomeContainer, SearchBar, UsersList } from '../styles/pages/home'
 
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  status: "active" | "inactive";
-}
 
 interface HomeProps {
   users: User[];
 }
 
-export default function Home({ users } : HomeProps) {
-  const [usersList, setUserList] = useState<User[]>([])
+export default function Home() {
+  const { usersList } = useContext(UserListContext)
   const [search, setSearch] = useState("")
-
-  useEffect(()=>{
-    setUserList(users)
-  }, [users])
 
   let filteredUser = search.length > 0 ? usersList.filter(user => user.name.toLowerCase().includes(search)) : []
 
@@ -30,6 +21,8 @@ export default function Home({ users } : HomeProps) {
       <Head>
           <title>Users | Eleven Dragons </title>
       </Head>
+
+      <Header url="/new-user-form" buttonText='Criar novo usuário'/>
 
       <HomeContainer>
         <h1>Users List</h1>
@@ -61,20 +54,9 @@ export default function Home({ users } : HomeProps) {
               <tr key={user.id}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.status}</td>
+                <td>{user.status === "active" ? "Ativo" : "Inativo"}</td>
               </tr>
             )}))}
-            
-            {/* <tr>
-              <td>Rodrigo</td>
-              <td>rodrigo@uk.com</td>
-              <td>Ativo</td>
-            </tr>
-            <tr>
-              <td>Rodrigo</td>
-              <td>rodrigo@uk.com</td>
-              <td>Ativo</td>
-            </tr> */}
           </tbody>
           
         </UsersList>
@@ -82,22 +64,3 @@ export default function Home({ users } : HomeProps) {
     </>
   )
 }
-
-export const getServerSideProps : GetServerSideProps = async () => {
-  let users = [];
-  try{
-  
-    users = await axios.get('https://gorest.co.in/public/v2/users')
-      .then(res => res.data)
-    
-    console.log(users)
-  } catch(err) {
-    console.log(err)
-  }
-  
-  return {
-    props: {
-      users,
-    }
-  }
-} 
