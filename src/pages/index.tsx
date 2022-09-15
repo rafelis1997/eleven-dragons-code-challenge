@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { useEffect, useState } from 'react';
+import { FormEvent, FormEventHandler, useEffect, useState } from 'react';
 import { HomeContainer, SearchBar, UsersList } from '../styles/pages/home'
 
 type User = {
@@ -17,9 +17,14 @@ interface HomeProps {
 
 export default function Home({ users } : HomeProps) {
   const [usersList, setUserList] = useState<User[]>([])
+  const [search, setSearch] = useState("")
+
   useEffect(()=>{
     setUserList(users)
   },[])
+
+  let filteredUser = search.length > 0 ? usersList.filter(user => user.name.includes(search)) : []
+
   
 
   return (
@@ -32,7 +37,7 @@ export default function Home({ users } : HomeProps) {
         <h1>Users List</h1>
 
         <SearchBar>
-          <input type="text" placeholder="Busca por nome do  usuário"/>
+          <input type="text" placeholder="Busca por nome do  usuário" onChange={(e) => setSearch(e.currentTarget.value)}/>
           <button type='submit'>Buscar</button>
         </SearchBar>
 
@@ -45,13 +50,23 @@ export default function Home({ users } : HomeProps) {
             </tr>
           </thead>
           <tbody>
-            {usersList.map(user => {return (
+            {filteredUser.length > 0 ? (
+              filteredUser.map(user => {return (
+                <tr key={user.id}>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.status}</td>
+                </tr>
+              )})
+            )
+            : 
+            (usersList.map(user => {return (
               <tr key={user.id}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.status}</td>
               </tr>
-            )})}
+            )}))}
             
             {/* <tr>
               <td>Rodrigo</td>
