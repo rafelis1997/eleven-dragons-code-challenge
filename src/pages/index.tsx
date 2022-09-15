@@ -1,9 +1,8 @@
 import axios from 'axios';
 import type { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { HomeContainer, SearchBar, UsersList } from '../styles/pages/home'
-import { api } from './api/hello';
 
 type User = {
   id: string;
@@ -17,6 +16,12 @@ interface HomeProps {
 }
 
 export default function Home({ users } : HomeProps) {
+  const [usersList, setUserList] = useState<User[]>([])
+  useEffect(()=>{
+    setUserList(users)
+  },[])
+  
+
   return (
     <>
       <Head>
@@ -40,7 +45,7 @@ export default function Home({ users } : HomeProps) {
             </tr>
           </thead>
           <tbody>
-            {users.map(user => {return (
+            {usersList.map(user => {return (
               <tr key={user.id}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
