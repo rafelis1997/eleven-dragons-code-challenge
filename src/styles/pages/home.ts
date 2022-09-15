@@ -12,17 +12,22 @@ export const HomeContainer = styled('div', {
 
 export const SearchBar = styled('form', {
   display: "flex",
-  justifyContent: 'space-between',
+  justifyContent: 'center',
   gap: '1rem',
 
   input: {
-    flex: 1,
+    width: '70%',
+    height: 50,
     border: 0,
     borderRadius: 8,
     background: '$gray300',
     padding: '0.5rem',
     color: '$gray900',
     fontWeight: 'bold',
+
+    '@bp1' : {
+      width: '100%',
+    }
   },
 
   button : {
