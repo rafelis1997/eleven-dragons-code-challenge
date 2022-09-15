@@ -67,6 +67,7 @@ export const getServerSideProps : GetServerSideProps = async () => {
   try{
   
     let users = await axios.get('https://gorest.co.in/public/v2/users?access-token=1a3fdda9c4722cde4eeef14308ed8ed0f402297982dc4d28b44ae1491d2db87e')
+      .then(res => res.data)
     
     console.log(users)
   } catch(err) {
