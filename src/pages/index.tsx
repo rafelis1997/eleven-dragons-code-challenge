@@ -23,7 +23,7 @@ export default function Home({ users } : HomeProps) {
     setUserList(users)
   },[])
 
-  let filteredUser = search.length > 0 ? usersList.filter(user => user.name.toLowerCase().match(search)) : []
+  let filteredUser = search.length > 0 ? usersList.filter(user => user.name.toLowerCase().startsWith(search)) : []
 
   
 
