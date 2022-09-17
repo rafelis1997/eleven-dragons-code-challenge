@@ -28,7 +28,7 @@ export default function Home() {
         <h1>Users List</h1>
 
         <SearchBar>
-          <input type="text" placeholder="Busca por nome do  usuário" onChange={(e) => setSearch(e.currentTarget.value)}/>
+          <input type="text" placeholder="Busca por nome do  usuário" onChange={(e) => setSearch(e.currentTarget.value.toLocaleLowerCase())}/>
         </SearchBar>
 
         <UsersList>
