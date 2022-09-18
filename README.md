@@ -1,34 +1,70 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Página de usuários Eleven Dragons Teste Técnico
 
-## Getting Started
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/60658855/190881698-7d890ba8-15e4-422d-b6f3-b39ef94e1003.gif"/>
+</p>
 
-First, run the development server:
+Bem vindo a minha versão do código solicitado para a vaga de Dev React na Eleven Dragons! Obrigado pela oportunidade, para desenvolver esse projeto
+resolvi os requisitos solicitados seguindo as melhores práticas de código e acessibilidade. Além dos requisitos solicitados, foram adicionadas as
+funções de editar usuários e responsividade para celulares abaixo de width:768px. 
+
+Para a estilização busquei as cores principais da empresa para seguir os padrões já adotados. Utilizando a biblioteca stitches podemos definir themas e com isso
+padronizar nossos componentes.
+
+Tive dificuldades de uso com a API nos primeiros dias de desafio e utilizando o fórum da API consegui que o desenvolvedor resolvesse os conflitos com a biblioteca
+Axios, as requisições estão funcionando como deveriam agora. Em caso de não funcionamento ao rodar localmente peço que teste a versão hospedada na Vercel
+
+## Requisitos: 
+
+🗸 Uma página que lista os usuários retornados ao fazer um GET em
+https://gorest.co.in/public/v2/users. Cada usuário deve conter nome, email e status
+(ativo ou inativo). 
+
+🗸 Deve ser possível buscar um usuário pelo nome e filtrar os usuários pelo status.
+
+🗸 Uma página com um formulário para acrescentar um novo usuário (apenas no estado
+da aplicação, sem chamada para um banco de dados). Os campos enviados devem
+ser:
+
+- Nome: entre 4 e 20 caracteres, podendo ser apenas caracteres alfanuméricos
+e underscore.
+- Email: deve ser um email válido, i.e., com a forma xxxx@yyyy.zzz
+- Status: boolean. (mudado para enum dos tipos "active" e "inactive" para correspondencia com a api)
+
+🗸 Deve ser possível navegar de uma página para outra.
+
+🗸 Responsividade.
+
+## Requisitos bônus:
+
+🗸 Edição de usuários.
+
+## Visualização
+
+Para ver o projeto você pode clonar este repositório:
 
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
 ```
+Ou ver sua versão hospedada na Vercel:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[Eleven Dragons Users](https://eleven-dragons-code-challenge.vercel.app)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Tecnologias utilizadas
+- Next.js
+- Axios
+- Stitches.js
+- Radix UI
+- React-Hook-Form
+- Zod para validação de formulários
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Referências
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Vercel](https://vercel.com/docs)
+- [Axios](https://axios-http.com/ptbr/docs/intro)
+- [Stitches.js](https://stitches.dev/docs/introduction)
+- [Radix UI](https://www.radix-ui.com)
+- [React-Hook-Form](https://react-hook-form.com/get-started)
+- [Zod](https://github.com/colinhacks/zod)
