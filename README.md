@@ -54,6 +54,7 @@ Ou ver sua versão hospedada na Vercel:
 
 ## Tecnologias utilizadas
 - Next.js
+- Typescript
 - Axios
 - Stitches.js
 - Radix UI
