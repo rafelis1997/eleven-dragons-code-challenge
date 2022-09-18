@@ -29,7 +29,7 @@ ser:
 - Nome: entre 4 e 20 caracteres, podendo ser apenas caracteres alfanuméricos
 e underscore.
 - Email: deve ser um email válido, i.e., com a forma xxxx@yyyy.zzz
-- Status: boolean. (mudado para enum dos tipos "active" e "inactive" para correspondencia com a api)
+- Status: boolean. (mudado para enum dos tipos "active" e "inactive" para correspondência com a api)
 
 🗸 Deve ser possível navegar de uma página para outra.
 
