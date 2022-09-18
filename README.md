@@ -8,7 +8,7 @@ Bem vindo a minha versão do código solicitado para a vaga de Dev React na Elev
 resolvi os requisitos solicitados seguindo as melhores práticas de código e acessibilidade. Além dos requisitos solicitados, foi adicionada a
 função de editar usuários.
 
-Para a estilização busquei as cores principais da empresa para seguir os padrões já adotados. Utilizando a biblioteca stitches podemos definir themas e com isso
+Para a estilização busquei as cores principais da empresa para seguir os padrões já adotados. Utilizando a biblioteca stitches podemos definir temas e com isso
 padronizar nossos componentes.
 
 Tive dificuldades de uso com a API nos primeiros dias de desafio e utilizando o fórum da API consegui que o desenvolvedor resolvesse os conflitos com a biblioteca
