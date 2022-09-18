@@ -12,13 +12,19 @@ export const HeaderContainer = styled('header', {
 
 export const NewUserButton = styled('a', {
   padding: "1rem 2.5rem",
-  background: "$green300",
+  background: "$yellow500",
   borderRadius: 8,
   cursor: "pointer",
-  color: '$gray200',
+  color: '$gray800',
 
   '&:hover': {
-    background: "$green500",
+    background: "$yellow300",
     transition: 'background-color 0.2s ease',
+  },
+
+  '@bp1': {
+    width: '150px',
+    padding: "1rem 1.5rem",
+    textAlign: 'center',
   }
 })

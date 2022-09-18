@@ -1,21 +1,20 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { NewUserFormInputs } from "../pages/new-user-form";
 
 export type User = {
-  id: string;
+  id: number;
   name: string;
   email: string;
   status: "active" | "inactive";
 }
 
-interface newUserAddFunctionProps extends NewUserFormInputs {
-  reset: () => void;
-}
 
 interface UserListContextType {
   usersList: User[];
   handleNewUserAdd: (data : NewUserFormInputs) => void;
+  handleUserEdit: (data : User) => void;
 }
 
 interface UserListContextProviderProps {
@@ -26,6 +25,7 @@ export const UserListContext = createContext({} as UserListContextType)
 
 export function UserListContextProvider({children} : UserListContextProviderProps) {
   const [usersList, setUserList] = useState<User[]>([])
+  const router = useRouter()
 
   useEffect(() => {
     fetchUserList()
@@ -55,9 +55,24 @@ export function UserListContextProvider({children} : UserListContextProviderProp
     setUserList(state => [newUser, ...state])
   }
 
+  function handleUserEdit(data : User) {
+    const editedUserList = usersList.map(user => {
+      if (user.id == data.id) {
+        return {
+          id: data.id,
+          name: data.name,
+          email: data.email,
+          status: data.status
+        };
+      }
+      return user
+    })
+    setUserList(editedUserList)
+  }
+
   return (
     <UserListContext.Provider
-      value={{ usersList, handleNewUserAdd }}
+      value={{ usersList, handleNewUserAdd, handleUserEdit }}
     >
       {children}
     </UserListContext.Provider>

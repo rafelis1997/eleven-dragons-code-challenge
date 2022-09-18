@@ -117,13 +117,13 @@ export const SubmitButton = styled('button', {
   alignSelf: 'flex-end',
   border: 0,
   padding: "1rem 2.5rem",
-  background: "$green300",
+  background: "$yellow500",
   borderRadius: 8,
   cursor: "pointer",
-  color: '$gray200',
+  color: '$gray800',
 
   '&:hover': {
-    background: "$green500",
+    background: "$yellow300",
     transition: 'background-color 0.2s ease',
   }
 })

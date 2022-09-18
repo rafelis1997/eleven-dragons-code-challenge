@@ -1,12 +1,23 @@
 import { Header } from "../../components/Header";
-import { NewFormContainer, NewUserFormContent, SelectTrigger, StyledContent, StyledItem, StyledViewport, StyledPortal, InputContainer, SelectContainer, StyledSeparator, SubmitButton } from "../../styles/pages/new-user-form";
+import { NewFormContainer, 
+        NewUserFormContent, 
+        SelectTrigger, 
+        StyledContent, 
+        StyledItem, 
+        StyledViewport, 
+        StyledPortal, 
+        InputContainer, 
+        SelectContainer, 
+        StyledSeparator,
+        SubmitButton } from "../../styles/pages/new-user-form";
 import * as Select from "@radix-ui/react-select"
 import { ChevronDownIcon, CheckIcon } from "@radix-ui/react-icons";
-import { useContext } from "react";
-import { UserListContext } from "../../context/UsersListContext";
+import { useContext, useEffect } from "react";
+import { User, UserListContext } from "../../context/UsersListContext";
 import * as zod from 'zod'
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from 'next/router'
 
 
 const NewUserFormSchema = zod.object({
@@ -15,23 +26,36 @@ const NewUserFormSchema = zod.object({
   status: zod.enum(["active", "inactive"]),
 })
 
-export type NewUserFormInputs = zod.infer<typeof NewUserFormSchema>
+type EditUserFormInputs = zod.infer<typeof NewUserFormSchema>
 
-export default function NewUserForm() {
-  const { handleNewUserAdd } = useContext(UserListContext);
+export default function EditUser() {
+  const { usersList } = useContext(UserListContext) 
+  const router = useRouter();
+  const { id } = router.query;
+  const { handleUserEdit } = useContext(UserListContext);
 
-  const { register, handleSubmit, formState: { isSubmitting, errors }, control, reset } = useForm<NewUserFormInputs>({
+  let user = usersList.find(user => user.id == Number(id)) as User;
+
+  const { register, handleSubmit, formState: { isSubmitting, errors }, control, reset } = useForm<EditUserFormInputs>({
     resolver: zodResolver(NewUserFormSchema),
     defaultValues: {
-      name: '',
-      email: '',
-      status: 'inactive',
+      name: user?.name,
+      email: user?.email,
+      status: user?.status,
     }
   });
 
-  function handleNewUserSubmit(data: NewUserFormInputs) {
-    handleNewUserAdd(data)
-    reset()
+  function handleNewUserSubmit(data: EditUserFormInputs) {
+    if(typeof id === "string") {
+      const numberId = Number(id)
+      const editedUser = {
+        id: numberId,
+        ...data
+      }
+      handleUserEdit(editedUser)
+      router.back()
+      reset()
+    }
   }
 
   return (
@@ -39,19 +63,19 @@ export default function NewUserForm() {
       <Header url="/" buttonText="Home"/>
 
       <NewFormContainer>
-        <h1>Criar novo usuário</h1>
+        <h1>Editar usuário</h1>
 
         <NewUserFormContent onSubmit={handleSubmit(handleNewUserSubmit)}>
           <InputContainer>
             <label htmlFor="name">Nome</label>
-            <input id="name" type="text" placeholder="Seu nome..." {...register("name")}/>
+            <input id="name" type="text" placeholder="Seu nome..." {...register("name")} defaultValue={user?.name}/>
             {errors.name && <p>Last name is required</p>}
 
           </InputContainer>
           
           <InputContainer>
             <label htmlFor="email">Email</label>
-            <input id="email" type="text" placeholder="email@seuemail.com" {...register("email")}/>
+            <input id="email" type="text" placeholder="email@seuemail.com" {...register("email")} defaultValue={user?.email}/>
             {errors.email && <p>Last name is required</p>}
           </InputContainer>
           
@@ -61,11 +85,13 @@ export default function NewUserForm() {
             <Controller 
               control={control}
               name="status"
-              render={({field}) => {
+              render={({field: {value=user?.status, onChange}}) => {
                 return (
-                  <Select.Root value={field.value} onValueChange={field.onChange}>
+                  <Select.Root value={value} onValueChange={onChange} >
                     <SelectTrigger>
-                      <Select.Value placeholder="Selecione status"/>
+                      <Select.Value>
+                        {value === "active" ? "Ativo" : "Inativo" }
+                      </Select.Value>
                       <Select.Icon>
                         <ChevronDownIcon />
                       </Select.Icon>
@@ -100,7 +126,7 @@ export default function NewUserForm() {
           </SelectContainer>
           
 
-          <SubmitButton type="submit" disabled={isSubmitting}>Adicionar</SubmitButton>
+          <SubmitButton type="submit" disabled={isSubmitting}>Editar</SubmitButton>
         </NewUserFormContent>
       </NewFormContainer>
     </>
