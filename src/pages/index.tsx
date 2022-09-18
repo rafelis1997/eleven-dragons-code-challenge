@@ -38,13 +38,13 @@ export default function Home() {
   return (
     <>
       <Head>
-          <title>Users | Eleven Dragons </title>
+          <title>Usuários | Eleven Dragons </title>
       </Head>
 
       <Header url="/new-user-form" buttonText='Criar novo usuário'/>
 
       <HomeContainer>
-        <h1>Users List</h1>
+        <h1>Lista de usuários</h1>
 
         <SearchBar>
           <input type="text" placeholder="Busca por nome do  usuário" onChange={(e) => setSearch(e.currentTarget.value.toLocaleLowerCase())}/>
