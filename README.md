@@ -5,8 +5,8 @@
 </p>
 
 Bem vindo a minha versão do código solicitado para a vaga de Dev React na Eleven Dragons! Obrigado pela oportunidade, para desenvolver esse projeto
-resolvi os requisitos solicitados seguindo as melhores práticas de código e acessibilidade. Além dos requisitos solicitados, foram adicionadas as
-funções de editar usuários e responsividade para celulares abaixo de width:768px. 
+resolvi os requisitos solicitados seguindo as melhores práticas de código e acessibilidade. Além dos requisitos solicitados, foi adicionada a
+função de editar usuários.
 
 Para a estilização busquei as cores principais da empresa para seguir os padrões já adotados. Utilizando a biblioteca stitches podemos definir themas e com isso
 padronizar nossos componentes.
