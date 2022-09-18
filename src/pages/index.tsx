@@ -1,13 +1,19 @@
 import Head from 'next/head'
+import {  useContext, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
-import {  useContext, useEffect, useState } from 'react';
+import { 
+  EditButton, 
+  EditButtonContainer, 
+  FilterButtons, 
+  FilterButtonsContainer, 
+  HomeContainer, SearchBar, 
+  UsersList } from '../styles/pages/home'
 import { Header } from '../components/Header';
 import { User, UserListContext } from '../context/UsersListContext';
-import { EditButton, EditButtonContainer, FilterButtons, FilterButtonsContainer, HomeContainer, SearchBar, UsersList } from '../styles/pages/home'
-import * as ToggleGroup from '@radix-ui/react-toggle-group';
-import Link from 'next/link';
 import PenIcon from '../assets/pen.svg'
-import Image from 'next/image';
+
 
 export default function Home() {
   const { usersList } = useContext(UserListContext)
@@ -123,7 +129,6 @@ export default function Home() {
                 )})
             )}
           </tbody>
-          
         </UsersList>
       </HomeContainer>
     </>

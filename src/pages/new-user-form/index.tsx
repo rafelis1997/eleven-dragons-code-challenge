@@ -1,12 +1,27 @@
-import { Header } from "../../components/Header";
-import { NewFormContainer, NewUserFormContent, SelectTrigger, StyledContent, StyledItem, StyledViewport, StyledPortal, InputContainer, SelectContainer, StyledSeparator, SubmitButton } from "../../styles/pages/new-user-form";
 import * as Select from "@radix-ui/react-select"
 import { ChevronDownIcon, CheckIcon } from "@radix-ui/react-icons";
 import { useContext } from "react";
-import { UserListContext } from "../../context/UsersListContext";
 import * as zod from 'zod'
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
+
+import { Header } from "../../components/Header";
+import { 
+  NewFormContainer, 
+  NewUserFormContent, 
+  SelectTrigger, 
+  StyledContent, 
+  StyledItem, 
+  StyledViewport, 
+  StyledPortal, 
+  InputContainer, 
+  SelectContainer, 
+  StyledSeparator, 
+  SubmitButton, 
+  ErrorText} from "../../styles/pages/new-user-form";
+
+import { UserListContext } from "../../context/UsersListContext";
+import Head from "next/head";
 
 
 const NewUserFormSchema = zod.object({
@@ -36,6 +51,10 @@ export default function NewUserForm() {
 
   return (
     <>
+      <Head>
+        <title>Criar novo usuário | Eleven Dragons</title>
+      </Head>
+
       <Header url="/" buttonText="Home"/>
 
       <NewFormContainer>
@@ -45,14 +64,14 @@ export default function NewUserForm() {
           <InputContainer>
             <label htmlFor="name">Nome</label>
             <input id="name" type="text" placeholder="Seu nome..." {...register("name")}/>
-            {errors.name && <p>Last name is required</p>}
+            {errors.name && <ErrorText>Entre um nome válido entre 4-20 caracteres</ErrorText>}
 
           </InputContainer>
           
           <InputContainer>
             <label htmlFor="email">Email</label>
             <input id="email" type="text" placeholder="email@seuemail.com" {...register("email")}/>
-            {errors.email && <p>Last name is required</p>}
+            {errors.email && <ErrorText>Entre um email válido no formato email@email.com</ErrorText>}
           </InputContainer>
           
           <SelectContainer>

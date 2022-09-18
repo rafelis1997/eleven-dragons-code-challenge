@@ -147,7 +147,3 @@ export const EditButtonContainer = styled('td', {
     padding: '0.2rem!important',
   },
 })
-
-// export const HomeContainer = styled('div', {
-
-// })

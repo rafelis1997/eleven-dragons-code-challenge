@@ -1,3 +1,11 @@
+import * as Select from "@radix-ui/react-select"
+import { ChevronDownIcon, CheckIcon } from "@radix-ui/react-icons";
+import { useContext } from "react";
+import * as zod from 'zod'
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from 'next/router'
+
 import { Header } from "../../components/Header";
 import { NewFormContainer, 
         NewUserFormContent, 
@@ -9,16 +17,10 @@ import { NewFormContainer,
         InputContainer, 
         SelectContainer, 
         StyledSeparator,
-        SubmitButton } from "../../styles/pages/new-user-form";
-import * as Select from "@radix-ui/react-select"
-import { ChevronDownIcon, CheckIcon } from "@radix-ui/react-icons";
-import { useContext, useEffect } from "react";
+        SubmitButton, 
+        ErrorText} from "../../styles/pages/new-user-form";
 import { User, UserListContext } from "../../context/UsersListContext";
-import * as zod from 'zod'
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useRouter } from 'next/router'
-
+import Head from "next/head";
 
 const NewUserFormSchema = zod.object({
   name: zod.string({required_error:"Nome é obrigatório"}).min(4).max(20).regex(/^[a-zA-z_ ]*$/),
@@ -27,6 +29,8 @@ const NewUserFormSchema = zod.object({
 })
 
 type EditUserFormInputs = zod.infer<typeof NewUserFormSchema>
+
+
 
 export default function EditUser() {
   const { usersList } = useContext(UserListContext) 
@@ -60,6 +64,10 @@ export default function EditUser() {
 
   return (
     <>
+      <Head>
+        <title>Editar usuário | Eleven Dragons</title>
+      </Head>
+
       <Header url="/" buttonText="Home"/>
 
       <NewFormContainer>
@@ -69,14 +77,14 @@ export default function EditUser() {
           <InputContainer>
             <label htmlFor="name">Nome</label>
             <input id="name" type="text" placeholder="Seu nome..." {...register("name")} defaultValue={user?.name}/>
-            {errors.name && <p>Last name is required</p>}
+            {errors.name && <ErrorText>Entre um nome válido entre 4-20 caracteres</ErrorText>}
 
           </InputContainer>
           
           <InputContainer>
             <label htmlFor="email">Email</label>
             <input id="email" type="text" placeholder="email@seuemail.com" {...register("email")} defaultValue={user?.email}/>
-            {errors.email && <p>Last name is required</p>}
+            {errors.email && <ErrorText>Entre um email válido no formato email@email.com</ErrorText>}
           </InputContainer>
           
           <SelectContainer>

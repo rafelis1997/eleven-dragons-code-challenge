@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useRouter } from "next/router";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { NewUserFormInputs } from "../pages/new-user-form";
 
@@ -25,7 +24,6 @@ export const UserListContext = createContext({} as UserListContextType)
 
 export function UserListContextProvider({children} : UserListContextProviderProps) {
   const [usersList, setUserList] = useState<User[]>([])
-  const router = useRouter()
 
   useEffect(() => {
     fetchUserList()
@@ -53,6 +51,7 @@ export function UserListContextProvider({children} : UserListContextProviderProp
     }
     
     setUserList(state => [newUser, ...state])
+    alert('Usuário criado com sucesso')
   }
 
   function handleUserEdit(data : User) {
@@ -68,6 +67,7 @@ export function UserListContextProvider({children} : UserListContextProviderProp
       return user
     })
     setUserList(editedUserList)
+    alert('Usuário editado com sucesso')
   }
 
   return (
